@@ -1,0 +1,16 @@
+.app-main{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.container{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}
+.content{
+    flex-grow: 1;
+}
+.navbar{
+    height: 40px;
+}
