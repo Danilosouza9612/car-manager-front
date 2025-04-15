@@ -5,7 +5,15 @@ export interface User {
     lastName: string;
     email: string;
     birthday: string;
+    phone: String;
+}
+
+export interface UserCreation extends User {
+    login: string;
+    password: string;
     cars?: Car[];
-    lastLogin?: String;
-    createdAt?: String
+}
+
+export interface UserUpdate extends User {
+    id: number
 }

@@ -1,0 +1,94 @@
+<div class="page-head">
+  <div class="page-title">
+    <h2>Create user</h2>
+  </div>
+  <div class="page-buttons">
+    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+  </div>
+</div>
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Login</mat-label>
+        <input matInput formControlName="login" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
+        <input matInput formControlName="birthday" [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phone" type="tel" />
+      </mat-form-field>
+    </div>
+
+    <div formArrayName="cars">
+      <h4>Cars</h4>
+      <div>
+        <button mat-flat-button (click)="addCarForm()" >Add</button>
+      </div>
+      <ng-container *ngFor="let carForm of cars.controls; let i = index">
+        <div [formGroupName]="i">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>License Plate</mat-label>
+            <input matInput formControlName="licensePlate" />
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Model</mat-label>
+            <input matInput formControlName="model" />
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Color</mat-label>
+            <input matInput formControlName="color" />
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Year</mat-label>
+            <input matInput type="number" formControlName="year" />
+          </mat-form-field>
+
+          <button mat-flat-button (click)="deleteCarForm(i)" >Remove</button>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</div>

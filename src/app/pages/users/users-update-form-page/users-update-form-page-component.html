@@ -1,0 +1,49 @@
+<div class="page-head">
+    <div class="page-title">
+      <h2>Edit user</h2>
+    </div>
+    <div class="page-buttons">
+      <button mat-flat-button color="primary" type="submit"  (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+  <div>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+        </mat-form-field>
+      </div>
+  
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" />
+        </mat-form-field>
+      </div>
+    
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+      </div>
+    
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Birthday</mat-label>
+          <input matInput formControlName="birthday" [matDatepicker]="picker" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" type="tel" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  

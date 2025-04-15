@@ -1,0 +1,47 @@
+<div class="page-head">
+    <div class="page-title">
+      <h2>{{ title }}</h2>
+    </div>
+    <div class="page-buttons">
+      <a mat-flat-button [routerLink]="getCreateRoute()">Create</a>
+    </div>
+</div>
+<div>
+    <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      @for (listColumn of listColumns; track listColumn.name) {
+        <ng-container [matColumnDef]="listColumn.name">
+          <th mat-header-cell *matHeaderCellDef> {{ listColumn.title }} </th>
+          <td mat-cell *matCellDef="let element"> {{ listColumn.dataMap(element) }} </td>
+        </ng-container>
+      } 
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <a [routerLink]="getShowRoute(element.id)">
+              <mat-icon aria-label="Edit" fontIcon="visibility" title="Show"></mat-icon>
+            </a>
+            <a [routerLink]="getEditRoute(element.id)" title="Edit">
+              <mat-icon aria-label="Edit" fontIcon="edit"></mat-icon>
+            </a>
+            <button>
+              <mat-icon aria-label="Delete" fontIcon="delete" (click)="delete(element.id)"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+    <div>
+      <mat-paginator [length]="pageLength"
+          [pageSizeOptions]="pageSizeOptions"
+          aria-label="Select page"
+          (page)="onPage($event)"
+      >
+      </mat-paginator>
+    </div>
+</div>
+

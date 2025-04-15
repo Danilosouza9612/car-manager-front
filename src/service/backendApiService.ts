@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { endpoint, baseResourcePath} from './backendEntryPoint'
+import { Injectable } from '@angular/core';
 
 const baseHeader = {
     'Content-Type': 'application/json;charset=utf-8',
@@ -7,42 +8,40 @@ const baseHeader = {
 }
 
 
+@Injectable({
+    providedIn: 'root'
+})
 export class BackendApiService{
     private axiosInstance: AxiosInstance;
 
-    constructor(resource: string){
+    constructor(){
         this.axiosInstance = axios.create({
-            baseURL: `${endpoint}${baseResourcePath}${resource}`,
+            baseURL: `${endpoint}${baseResourcePath}`,
         })
     }
 
-    async list(config?: any){
-        let response = await this.axiosInstance.get('', { headers: baseHeader});
+    async list(resource: string, params?: any, config?: any){
+        let response = await this.axiosInstance.get(`/${resource}`, { headers: baseHeader, params: params});
         return response.data;
     }
 
-    async get(id:number, config?: any){
-        let response:AxiosResponse = await this.axiosInstance.get(`/${id}`, config);
+    async get(resource: string, id:number, config?: any){
+        let response:AxiosResponse = await this.axiosInstance.get(`/${resource}/${id}`, config);
         return response.data;
     }
 
-    async create(data: any, config?: any){
-        let response = await this.axiosInstance.post('', data, config);
+    async create(resource: string, data: any, config?: any){
+        let response = await this.axiosInstance.post(`/${resource}`, data, config);
         return response.data;
     }
 
-    async update(id:number, data: any, config?: any){
-        let response = await this.axiosInstance.put(`/${id}`, data, config);
+    async update(resource: string, id:number, data: any, config?: any){
+        let response = await this.axiosInstance.put(`/${resource}/${id}`, data, config);
         return response.data;
     }
 
-    async delete(id: number){
-        let response = await this.axiosInstance.delete(`/${id}`);
+    async delete(resource: string, id: number){
+        let response = await this.axiosInstance.delete(`/${resource}/${id}`);
         return response.data;
-    }
-
-    private handleError(err: any){
-        console.log("err");
-        console.log(err.response.data);
     }
 }

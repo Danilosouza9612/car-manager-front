@@ -8,8 +8,12 @@
     flex-grow: 1;
     flex-direction: row;
 }
-.content{
+.content-container{
     flex-grow: 1;
+    overflow: auto;
+}
+.content{
+    min-height: min-content;
 }
 .navbar{
     height: 40px;
