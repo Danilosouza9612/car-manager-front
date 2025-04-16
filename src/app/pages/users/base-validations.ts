@@ -12,4 +12,5 @@ export const baseCreateValidations = {
     ...baseValidations,
     login: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    passwordConfirmation: ['', [Validators.required, Validators.minLength(6)]],
 }
