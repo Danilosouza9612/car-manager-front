@@ -1,10 +1,15 @@
 <mat-toolbar>
   <span>My App</span>
   <span class="spacing"></span>
-  <button *ngIf="!(isLogged$ | async)" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="login()">
-    <mat-icon>account_circle</mat-icon>
+  <button *ngIf="!(isLogged$ | async) else loggedTemplate" mat-icon-button title="Login" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="login()">
+    <mat-icon>login</mat-icon>
   </button>
-  <button *ngIf="isLogged$ | async" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
+  <ng-template #loggedTemplate>
+    <a routerLink="/me" mat-icon-button class="example-icon favorite-icon" title="Account info" aria-label="Example icon-button with heart icon">
+      <mat-icon>account_circle</mat-icon>
+    </a>
+    <button mat-icon-button class="example-icon favorite-icon" title="Logout" aria-label="Example icon-button with heart icon" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </ng-template>
 </mat-toolbar>

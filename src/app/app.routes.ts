@@ -8,12 +8,14 @@ import { SessionActivate } from './activate/SessionActivate';
 import { CarsCreateFormPageComponent } from './pages/cars/cars-create-form-page/cars-create-form-page.component';
 import { CarsUpdateFormPageComponent } from './pages/cars/cars-update-form-page/cars-update-form-page.component';
 import { CarsShowPageComponent } from './pages/cars/cars-show-page/cars-show-page.component';
+import { MeInfoPageComponent } from './pages/me-info-page/me-info-page.component';
 
 export const routes: Routes = [
     { path: 'users', component: UsersPageComponent },
     { path: 'users/create', component: UsersCreateFormPageComponent },
     { path: 'users/:id', component: UsersShowPageComponent },
     { path: 'users/:id/edit', component: UsersUpdateFormPageComponent },
+    { path: 'me', component: MeInfoPageComponent, canActivate:[SessionActivate] },
     { path: 'cars', component: CarsPageComponent, canActivate:[SessionActivate] },
     { path: 'cars/create', component: CarsCreateFormPageComponent, canActivate:[SessionActivate] },
     { path: 'cars/:id/edit', component: CarsUpdateFormPageComponent, canActivate:[SessionActivate] },

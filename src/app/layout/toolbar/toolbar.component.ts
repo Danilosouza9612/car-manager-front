@@ -7,10 +7,11 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { SessionStore } from '../../../state/sessionStore';
 import { Observable, tap } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, AsyncPipe],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, AsyncPipe, RouterModule],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { BackendApiService } from "./backendApiService";
-import { baseHeader, baseResourcePath, endpoint } from "./backendEntryPoint";
+import { AuthenticatedBackendApiService, baseHeader, baseResourcePath, endpoint } from "./backendEntryPoint";
 import { SessionStore } from '../state/sessionStore';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
@@ -9,19 +9,10 @@ import { tap } from 'rxjs';
     providedIn: 'root'
 })
 
-export class CarsBackendApiService implements BackendApiService {
-    private axiosInstance: AxiosInstance;
-    private token: String | null = null;
-    private resource: string;
-    private requestBaseHeader: any;
-
-    constructor(private sessionStore: SessionStore){
-        this.axiosInstance = axios.create({
-            baseURL: `${endpoint}${baseResourcePath}`,
-        })
+export class CarsBackendApiService extends AuthenticatedBackendApiService implements BackendApiService {
+    constructor(override sessionStore: SessionStore){
+        super(sessionStore);
         this.resource = "cars";
-        sessionStore.token$.pipe(tap(tokenState => this.token = tokenState)).subscribe();
-        this.requestBaseHeader = {...baseHeader, Authorization: `Bearer ${this.token}`};
     }
 
     async list(params?: any, header?: any){
