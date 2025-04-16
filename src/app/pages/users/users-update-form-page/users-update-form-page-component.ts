@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BaseUpdateFormPageComponent } from '../../../shared/pages/base-update-form-page/base-update-form-page-component';
-import { BackendApiService } from '../../../../service/backendApiService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../../state/user/user';
 import { baseValidations } from '../base-validations';
@@ -12,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
+import { UserBackendApiService } from '../../../../service/userBackendApiService';
 
 @Component({
     selector: 'app-users-update-form-page',
@@ -22,8 +22,8 @@ import { MatDividerModule } from '@angular/material/divider';
 export class UsersUpdateFormPageComponent extends BaseUpdateFormPageComponent<User> {
   userForm: FormGroup;
 
-  constructor(override api:BackendApiService, override router: Router, override activatedRoute: ActivatedRoute, private fb: FormBuilder) {
-    super(api, router, activatedRoute);
+  constructor(override router: Router, override activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+    super(router, activatedRoute, UserBackendApiService);
     this.userForm = this.fb.group(baseValidations);
   }
 

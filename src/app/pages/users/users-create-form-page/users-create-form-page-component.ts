@@ -9,10 +9,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { UserCreation } from '../../../../state/user/user';
-import { BackendApiService } from '../../../../service/backendApiService';
 import { Router } from '@angular/router';
 import { BaseCreateFormPageComponent } from '../../../shared/pages/base-create-form-page/base-create-form-page-component';
-import { baseCreateValidations, baseValidations } from '../base-validations';
+import { baseCreateValidations } from '../base-validations';
+import { UserBackendApiService } from '../../../../service/userBackendApiService';
+import { baseCarValidations } from '../../cars/base-validations';
 
 
 @Component({
@@ -24,8 +25,8 @@ import { baseCreateValidations, baseValidations } from '../base-validations';
 export class UsersCreateFormPageComponent extends BaseCreateFormPageComponent<UserCreation>{
   userForm: FormGroup;
 
-  constructor(override api:BackendApiService, override router: Router, private fb: FormBuilder) {
-    super(api, router);
+  constructor(override router: Router, private fb: FormBuilder) {
+    super(router, UserBackendApiService);
     this.userForm = this.fb.group({
       ...baseCreateValidations,
       cars: this.fb.array([])
@@ -45,12 +46,7 @@ export class UsersCreateFormPageComponent extends BaseCreateFormPageComponent<Us
   }
 
   addCarForm(){
-    let carForm: FormGroup = this.fb.group({
-      licensePlate: ['', [Validators.required, Validators.maxLength(7), Validators.minLength(7)]],
-      model: ['', Validators.required],
-      color: ['', Validators.required],
-      year: [2000, [Validators.required]]
-    })
+    let carForm: FormGroup = this.fb.group(baseCarValidations)
 
     this.cars.push(carForm);
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BackendApiService } from '../../../../service/backendApiService';
 
@@ -11,7 +11,10 @@ export enum FormType{
     template: ''
 })
 export abstract class BaseFormPageComponent<T> {
-  constructor(protected api: BackendApiService){}
+  protected api : BackendApiService;
+  constructor(classRef: Function){
+    this.api = inject(classRef);
+  }
 
   abstract get formGroup(): FormGroup
 
@@ -24,7 +27,7 @@ export abstract class BaseFormPageComponent<T> {
   }
 
   handleError = (error: any) => {
-    console.error(error.message);
+    console.error(error);
   }
 
   abstract handleSubmit(data: T) : void;

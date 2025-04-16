@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexPageComponent } from './index-page.component';
+import { LoginDialogComponent } from './login-dialog.component';
 
-describe('IndexPageComponent', () => {
-  let component: IndexPageComponent;
-  let fixture: ComponentFixture<IndexPageComponent>;
+describe('LoginDialogComponent', () => {
+  let component: LoginDialogComponent;
+  let fixture: ComponentFixture<LoginDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IndexPageComponent]
+      imports: [LoginDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IndexPageComponent);
+    fixture = TestBed.createComponent(LoginDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { BaseFormPageComponent, FormType } from '../base-form-page/base-form-page-component';
-import { Route, Router } from '@angular/router';
-import { BackendApiService } from '../../../../service/backendApiService';
+import { Router } from '@angular/router';
 
 @Component({
     template:''
 })
 export abstract class BaseCreateFormPageComponent<T> extends BaseFormPageComponent<T>{
 
-  constructor(override api: BackendApiService, protected router: Router){
-      super(api);
+  constructor(protected router: Router, classRef: Function){
+      super(classRef);
   }
 
   override handleSubmit(data: T): void {
-      this.api.create(this.resource, data).then(this.handleSuccess, this.handleError);
+      this.api.create(data).then(this.handleSuccess, this.handleError);
   }
 
   handleSuccess = (data: T) => {

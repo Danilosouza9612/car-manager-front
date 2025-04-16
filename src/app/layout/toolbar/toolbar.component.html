@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <span>My App</span>
+  <span class="spacing"></span>
+  <button *ngIf="!(isLogged$ | async)" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="login()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button *ngIf="isLogged$ | async" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

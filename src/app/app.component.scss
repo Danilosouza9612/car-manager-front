@@ -16,5 +16,8 @@
     min-height: min-content;
 }
 .navbar{
-    height: 40px;
+    z-index: 1000;
+}
+.left-navbar{
+    width:12em;
 }

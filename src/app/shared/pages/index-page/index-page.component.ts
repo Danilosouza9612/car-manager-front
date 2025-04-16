@@ -1,10 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatIcon } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { BackendApiService } from '../../../../service/backendApiService';
 
 export interface ListColumn<T> {
@@ -14,22 +9,13 @@ export interface ListColumn<T> {
 }
 
 @Component({
-  selector: 'app-index-page',
-  imports: [MatTableModule, MatButtonModule, RouterModule, MatIcon, MatDialogModule, MatPaginatorModule],
-  templateUrl: './index-page.component.html',
-  styleUrl: './index-page.component.scss'
+  template: ''
 })
-export class IndexPageComponent implements OnInit{
-  @Input() title: string = 'Index Page';
-  @Input() listColumns: ListColumn<any>[] = [];
-  @Input() displayedColumns: string[] = [];
-  @Input() resource: string = ''
-
-  private backendApiService: BackendApiService;
-
-  constructor(backendApiService: BackendApiService){
-    this.backendApiService = backendApiService;
-  }
+export abstract class IndexPageComponent implements OnInit{
+  abstract get resource(): string;
+  abstract get listColumns(): ListColumn<any>[];
+  abstract get displayedColumns(): string[];
+  abstract get api(): BackendApiService;
 
   dataSource = [];
   pageSizeOptions = [5, 10, 25];
@@ -55,17 +41,17 @@ export class IndexPageComponent implements OnInit{
   }
 
   onPage(event: PageEvent){
-    this.backendApiService.list(this.resource, {page: event.pageIndex, per_page: event.pageSize}).then((data) => this.mapData(data));
+    this.api?.list({page: event.pageIndex, per_page: event.pageSize}).then((data: any) => this.mapData(data));
   }
 
   delete(id: number){
-    this.backendApiService.delete(this.resource, id).then(() => {
+    this.api?.delete(id).then(() => {
       this.loadData();
     });
   }
 
   loadData(){
-    this.backendApiService.list(this.resource).then((data) => this.mapData(data));
+    this.api?.list().then((data: any) => this.mapData(data));
   }
 
   mapData(data: any){

@@ -1,0 +1,39 @@
+<div class="page-head">
+    <div class="page-title">
+      <h2>Create car</h2>
+    </div>
+    <div class="page-buttons">
+      <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+    </div>
+</div>
+<form [formGroup]="formGroup">
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>License Plate</mat-label>
+            <input matInput formControlName="licensePlate" />
+          </mat-form-field> 
+    </div>
+    
+    <div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="model" />
+      </mat-form-field>
+    </div>
+
+    <div>
+    
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Color</mat-label>
+        <input matInput formControlName="color" />
+      </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Year</mat-label>
+            <input matInput type="number" formControlName="year" />
+        </mat-form-field>
+    </div>
+
+</form>
