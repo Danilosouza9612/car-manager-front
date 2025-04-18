@@ -3,5 +3,6 @@ export interface Car{
     model: String,
     licensePlate: String,
     color: String,
-    year: number
+    year: number,
+    photoPath: String
 }

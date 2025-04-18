@@ -1,0 +1,16 @@
+<div class="page-head">
+    <div class="page-title">
+      <h2>Upload photo for {{title}}</h2>
+    </div>
+    <div class="page-buttons">
+      <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+    </div>
+</div>
+<form class="upload-avatar-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+        <div>
+            <mat-label>Choose File</mat-label>
+            <input type="file" (change)="setFileInput($event)"/>
+        </div>
+    </div>
+</form>

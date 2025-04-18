@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { BackendApiService } from "./backendApiService";
+import { AvatarBackendApiService, BackendApiService } from "./backendApiService";
 import { AuthenticatedBackendApiService, baseHeader, baseResourcePath, endpoint } from "./backendEntryPoint";
 import { SessionStore } from '../state/sessionStore';
 import { Injectable } from '@angular/core';
@@ -9,7 +9,7 @@ import { tap } from 'rxjs';
     providedIn: 'root'
 })
 
-export class CarsBackendApiService extends AuthenticatedBackendApiService implements BackendApiService {
+export class CarsBackendApiService extends AuthenticatedBackendApiService implements BackendApiService, AvatarBackendApiService {
     constructor(override sessionStore: SessionStore){
         super(sessionStore);
         this.resource = "cars";
@@ -39,5 +39,11 @@ export class CarsBackendApiService extends AuthenticatedBackendApiService implem
         let response = await this.axiosInstance.delete(`/${this.resource}/${id}`, { headers: this.requestBaseHeader});
         return response.data;
     }
-    
+
+    async uploadPhoto(id: number, file: File, header?: any) {
+        const formData = new FormData();
+        formData.append('file', file);
+        let response = await this.axiosInstance.post(`/${this.resource}/${id}/upload_photo`, formData, { headers: {...this.requestBaseHeader, 'Content-Type': 'multipart/form-data', header}});
+        return response.data;
+    }
 }

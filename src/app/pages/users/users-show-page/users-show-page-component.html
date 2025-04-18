@@ -1,5 +1,10 @@
 <div class="page-title">
-    <h2>User</h2>
+    <div class="page-title">
+        <h2>Car</h2>
+    </div>
+    <div class="page-buttons">
+        <a mat-flat-button color="primary" routerLink="/users/{{ data.id }}/upload_photo">Upload photo</a>
+    </div>
 </div>
 <div>
     <p><strong>First Name:</strong> {{ data.firstName }}</p>
@@ -7,4 +12,10 @@
     <p><strong>Birthday:</strong> {{ data.birthday }}</p>
     <p><strong>Email:</strong> {{ data.email }}</p>
     <p><strong>Phone:</strong> {{ data.phone }}</p>
+</div>
+<div *ngIf="data.photoPath!=null" class="photo-container">
+    <h3>Photo</h3>
+    <div class="photos-list">
+        <img [src]="data.photoPath" style="max-width:50%" alt="Car Photo" class="car-photo"/>
+    </div>
 </div>

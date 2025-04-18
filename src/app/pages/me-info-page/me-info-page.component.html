@@ -2,17 +2,22 @@
     <h2>{{ data?.firstName}}</h2>
 </div>
 <div>
+    <h3>Photo</h3>
+    <img [src]="data?.photoPath" alt="User Image" class="user-image" *ngIf="data?.photoPath" />
     <p><strong>First Name:</strong> {{ data?.firstName }}</p>
     <p><strong>Last Name:</strong> {{ data?.lastName }}</p>
     <p><strong>Birthday:</strong> {{ data?.birthday }}</p>
     <p><strong>Email:</strong> {{ data?.email }}</p>
     <p><strong>Phone:</strong> {{ data?.phone }}</p>
     <div *ngIf="(data?.cars ?? []).length > 0">
+        <h3>Cars</h3>
         <ng-container *ngFor="let car of data?.cars">
             <p><strong>License Plate:</strong> {{ car.licensePlate }}</p>
             <p><strong>Model:</strong> {{ car.model }}</p>
             <p><strong>Color:</strong> {{ car.color }}</p>
             <p><strong>Year:</strong> {{ car.year }}</p>
+            <h4>Photo</h4>
+            <img [src]="car.photoPath" alt="Car Image" class="car-image" *ngIf="car.photoPath" />
         </ng-container>
     </div>
 </div>

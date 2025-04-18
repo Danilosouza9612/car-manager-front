@@ -5,7 +5,7 @@ export const baseValidations = {
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     birthday: ['', Validators.required],
-    phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+    phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
 }
 
 export const baseCreateValidations = {

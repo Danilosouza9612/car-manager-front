@@ -5,3 +5,7 @@ export interface BackendApiService {
     update(id: number, data: any, header?: any): any;
     delete(id: number): any;
 }
+
+export interface AvatarBackendApiService{
+    uploadPhoto(id: number, file: File, header?: any): Promise<any>;
+}

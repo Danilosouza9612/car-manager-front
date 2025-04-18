@@ -1,9 +1,20 @@
 <div class="page-title">
-    <h2>User</h2>
+    <div class="page-title">
+        <h2>Car</h2>
+    </div>
+    <div class="page-buttons">
+        <a mat-flat-button color="primary" routerLink="/cars/{{ data.id }}/upload_photo">Upload photo</a>
+    </div>
 </div>
 <div>
     <p><strong>License Plate:</strong> {{ data.licensePlate }}</p>
     <p><strong>Model:</strong> {{ data.model }}</p>
     <p><strong>Color:</strong> {{ data.color }}</p>
     <p><strong>Year:</strong> {{ data.year }}</p>
+</div>
+<div *ngIf="data.photoPath!=null" class="photo-container">
+    <h3>Photo</h3>
+    <div class="photos-list">
+        <img [src]="data.photoPath" style="max-width:50%" alt="Car Photo" class="car-photo"/>
+    </div>
 </div>

@@ -1,12 +1,12 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { endpoint, baseResourcePath, baseHeader} from './backendEntryPoint'
-import { BackendApiService } from './backendApiService';
+import { AvatarBackendApiService, BackendApiService } from './backendApiService';
 import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserBackendApiService implements BackendApiService{
+export class UserBackendApiService implements BackendApiService, AvatarBackendApiService {
     private axiosInstance: AxiosInstance;
     private resource: string
 
@@ -39,6 +39,13 @@ export class UserBackendApiService implements BackendApiService{
 
     async delete(id: number){
         let response = await this.axiosInstance.delete(`/${this.resource}/${id}`, { headers: baseHeader});
+        return response.data;
+    }
+
+    async uploadPhoto(id: number, file: File, header?: any) {
+        const formData = new FormData();
+        formData.append('file', file);
+        let response = await this.axiosInstance.post(`/${this.resource}/${id}/upload_photo`, formData, { headers: {...baseHeader, 'Content-Type': 'multipart/form-data', header}});
         return response.data;
     }
 }
