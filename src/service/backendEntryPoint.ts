@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { SessionStore } from "../state/sessionStore";
 import { tap } from "rxjs";
 
-export const endpoint = "http://localhost:8080"
+export const endpoint = "http://car-manager-alb-148629350.eu-west-1.elb.amazonaws.com"
 export const baseResourcePath = "/api"
 
 export const baseHeader = {
